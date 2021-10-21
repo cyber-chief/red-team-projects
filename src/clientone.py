@@ -3,7 +3,7 @@ import threading
 import sys
 
 #check for correct usage
-if len(sys.argv != 3):
+if len(sys.argv) != 3:
     print("Usage: clientone.py $ip $port")
     exit()
 
@@ -12,12 +12,13 @@ host = str(sys.argv[1])
 port = int(sys.argv[2])
 
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-client.connect(host,port)
+client.connect((host,port))
 
 def recieve():
     while True:
         try:
             message = client.recv(1024).decode("utf-8")
+            print(message)
             if message == "NICK":
                 client.send(username.encode("utf-8"))
             else:

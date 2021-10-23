@@ -43,10 +43,10 @@ def decrypt(message, shift):
 def recieve():
     while True:
         try:
-            message = client.recv(1024).decode("utf-8")
+            message = client.recv(2048).decode("utf-8")
 
             if message == "NICK":
-                print("cleared")
+               
                 client.send(username.encode("utf-8"))
             else:
                 username, message, shift = message.split(":")
@@ -59,7 +59,6 @@ def recieve():
 
 def write():
     while True:
-        print("got to message")
         decMessage = input('Message:')
         message = "{}: {}:{}".format(username,encrypt(decMessage,shift), shift)
         client.send(message.encode("utf-8"))

@@ -50,9 +50,8 @@ def broadcast(message):
 def handle(client):
     while True:
         try:
-            message = client.recv(1024)
+            message = client.recv(2048)
             broadcast(message)
-            print(message)
         except:
             index = clients.index(client)
             clients.remove(index)
@@ -68,8 +67,7 @@ def receive():
         print("{} connected to server".format(address))
 
         client.send("NICK".encode("utf-8"))
-        username = client.recv(1024).decode("utf-8")
-        print(username)
+        username = client.recv(2048).decode("utf-8")
         nicknames.append(username)
         clients.append(client)
 

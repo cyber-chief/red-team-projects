@@ -55,7 +55,7 @@ if len(sys.argv) == 4:
     userList = sys.argv[2]
     passList = sys.argv[3]
 else:
-    print("Usage: web-brute.py $requestFile")
+    print("Usage: web-brute.py $requestFile $userFile $passwordFile")
     exit()
 #read in request content
 f = open(file, 'r')
